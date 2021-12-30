@@ -129,6 +129,7 @@ $RECYCLE.BIN/
 packaged.yaml
 .aws-sam
 samconfig.toml
+template-practice.yaml
 
 # End of https://www.gitignore.io/api/osx,node,linux,windows
 # node_modules #
