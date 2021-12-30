@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: '2010-0909'
+AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: "Practice SAM"
 
@@ -47,8 +47,6 @@ Parameters:
     NoEcho: true
 
 Resources:
-
-# Cognito Declaration
   TodoUserPool:
     Type: AWS::Cognito::UserPool
     Properties:
@@ -293,17 +291,17 @@ Resources:
 
 # This role allows API Gateway to push execution and access logs to CloudWatch logs
   ApiGatewayPushToCloudWatchRole:
-  Type: "AWS::IAM::Role"
+    Type: AWS::IAM::Role
     Properties:
       Description: "Push logs to CloudWatch logs from API Gateway"
       AssumeRolePolicyDocument:
-        Version: "2012-10-17"
-          Statement:
-            - Effect: Allow
-              Principal:
-                Service:
-                  - "apigateway.amazonaws.com"
-              Action: "sts:AssumeRole"
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - "apigateway.amazonaws.com"
+            Action: "sts:AssumeRole"
         ManagedPolicyArns:
           - !Sub "arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
 # Specifies a log group
@@ -315,25 +313,25 @@ Resources:
 
 # Amplify console hosting for static website
   AmplifyRole:
-    Type: AWS::IAM::Role
+    Type: 'AWS::IAM::Role'
     Properties:
       AssumeRolePolicyDocument:
-        Version: 2012-10-17
+        Version: "2012-10-17"
         Statement:
           - Effect: Allow
             Principal:
               Service:
                 - amplify.amazonaws.com
             Action:
-              - sts:AssumeRole
+              - 'sts:AssumeRole'
       Policies:
         - PolicyName: Amplify
           PolicyDocument:
             Version: 2012-10-17
             Statement:
               - Effect: Allow
-                Action: "amplify:*"
-                Resource: "*"
+                Action: 'amplify:*'
+                Resource: '*'
 # The AWS::Amplify::App resource creates Apps in the Amplify Console. 
 # An App is a collection of branches.
   AmplifyApp:
